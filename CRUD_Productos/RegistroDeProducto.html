@@ -3,70 +3,612 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Producto</title>
+    <title>Registrar Producto - Comic World</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Static/CSS/styles.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .navbar-comic {
+            background: linear-gradient(135deg, #dc3545, #9f1f2c);
+        }
+        
+        .page-title {
+            font-family: 'Bangers', cursive;
+            color: #dc3545;
+            letter-spacing: 1px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .form-card {
+            border-radius: 15px;
+            border: none;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, #dc3545, #9f1f2c);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .form-header h2 {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+        
+        .form-body {
+            padding: 30px;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 10px 15px;
+            border: 1px solid #ced4da;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+        
+        .btn-comic-primary {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-comic-primary:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-comic-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-comic-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .image-preview-container {
+            width: 100%;
+            height: 300px;
+            border: 2px dashed #ced4da;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .image-preview-container:hover {
+            border-color: #dc3545;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .image-placeholder {
+            color: #6c757d;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .image-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .form-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .form-section-title {
+            font-family: 'Bangers', cursive;
+            color: #dc3545;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .breadcrumb-item a {
+            color: #dc3545;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .form-floating label {
+            padding-left: 15px;
+        }
+        
+        .form-floating .form-control {
+            height: calc(3.5rem + 2px);
+            padding: 1rem 0.75rem;
+        }
+        
+        .form-floating textarea.form-control {
+            height: auto;
+            min-height: 100px;
+        }
+        
+        .category-badge {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .hero-section {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/Static/IMG/home/catalogoBanner.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 30px;
+        }
+        
+        .hero-title {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+        }
+        
+        .input-group-text {
+            background-color: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+    </style>
 </head>
 <body>
-
-<div class="container mt-5">
-    <h2 class="text-center">Registrar Nuevo Producto</h2>
-    <div class="card p-4 shadow">
-        <form action="#" method="POST" enctype="multipart/form-data">
-            <!-- Nombre del Producto -->
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre del Producto</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
+    <!-- Navbar Administrador -->
+    <nav id="navbar-admin" class="navbar navbar-expand-lg navbar-dark navbar-comic sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/home.html">
+                <i class="fas fa-book-open me-2"></i>Comic World
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAdmin">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAdmin">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-box-open me-1"></i>Productos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/CRUD_Productos/ConsultaDeProductos.html"><i class="fas fa-clipboard-list me-2"></i>Stock Tienda</a></li>
+                            <li><a class="dropdown-item" href="/CRUD_Productos/RegistroDeProducto.html"><i class="fas fa-plus me-2"></i>Registrar Producto</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-truck me-1"></i>Proveedores
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-list me-2"></i>Lista de Proveedores</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus me-2"></i>Dar de Alta Proveedor</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-shopping-cart me-1"></i>Pedidos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-truck-loading me-2"></i>Pedidos a Proveedor</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-users me-2"></i>Pedidos a Cliente</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-check-circle me-2"></i>Pedidos Realizados</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-trophy me-1"></i>Clientes Top
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-light" href="#">
+                            <i class="fas fa-sign-out-alt me-1"></i>Salir
+                        </a>
+                    </li>
+                </ul>
             </div>
+        </div>
+    </nav>
 
-            <!-- Categoría -->
-            <div class="mb-3">
-                <label for="categoria" class="form-label">Categoría</label>
-                <select class="form-select" id="categoria" name="categoria" required>
-                    <option value="">Selecciona una categoría</option>
-                    <option value="comic">Cómic</option>
-                    <option value="figura">Figura</option>
-                </select>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold hero-title">Registrar Nuevo Producto</h1>
+                    <p class="lead">Añade un nuevo producto a tu inventario de cómics y figuras</p>
+                </div>
             </div>
-
-            <!-- Proveedor -->
-            <div class="mb-3">
-                <label for="proveedor" class="form-label">Proveedor</label>
-                <input type="text" class="form-control" id="proveedor" name="proveedor" required>
-            </div>
-
-            <!-- Descripción -->
-            <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
-            </div>
-
-            <!-- Precio -->
-            <div class="mb-3">
-                <label for="precio" class="form-label">Precio</label>
-                <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
-            </div>
-
-            <!-- Stock -->
-            <div class="mb-3">
-                <label for="stock" class="form-label">Stock Disponible</label>
-                <input type="number" class="form-control" id="stock" name="stock" required>
-            </div>
-
-            <!-- Subir Imagen -->
-            <div class="mb-3">
-                <label for="imagen" class="form-label">Imagen del Producto</label>
-                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
-            </div>
-
-            <!-- Botón de Envío -->
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Registrar Producto</button>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Contenido Principal -->
+    <div class="container mb-5">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home.html">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="/CRUD_Productos/ConsultaDeProductos.html">Productos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar Producto</li>
+            </ol>
+        </nav>
 
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Formulario de Registro -->
+                <div class="card form-card">
+                    <div class="form-header">
+                        <h2><i class="fas fa-plus-circle me-2"></i>Datos del Producto</h2>
+                    </div>
+                    <div class="form-body">
+                        <form id="productForm" action="#" method="POST" enctype="multipart/form-data">
+                            <!-- Información Básica -->
+                            <div class="form-section">
+                                <h4 class="form-section-title">Información Básica</h4>
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre del Producto</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ej: Batman: The Dark Knight #1">
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="categoria" class="form-label">Categoría</label>
+                                        <select class="form-select" id="categoria" name="categoria" required>
+                                            <option value="">Selecciona una categoría</option>
+                                            <option value="comic">Cómic</option>
+                                            <option value="figura">Figura</option>
+                                            <option value="manga">Manga</option>
+                                            <option value="coleccionable">Coleccionable</option>
+                                            <option value="accesorio">Accesorio</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="proveedor" class="form-label">Proveedor</label>
+                                        <select class="form-select" id="proveedor" name="proveedor" required>
+                                            <option value="">Selecciona un proveedor</option>
+                                            <option value="marvel">Marvel</option>
+                                            <option value="dc">DC Comics</option>
+                                            <option value="image">Image Comics</option>
+                                            <option value="darkhorse">Dark Horse</option>
+                                            <option value="bandai">Bandai</option>
+                                            <option value="mcfarlane">McFarlane Toys</option>
+                                            <option value="otro">Otro</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label">Descripción</label>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required placeholder="Describe el producto con detalle..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Información de Precio y Stock -->
+                            <div class="form-section">
+                                <h4 class="form-section-title">Precio y Disponibilidad</h4>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="precio" class="form-label">Precio</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="precio" name="precio" step="0.01" min="0" required placeholder="0.00">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="stock" class="form-label">Stock Disponible</label>
+                                        <input type="number" class="form-control" id="stock" name="stock" min="0" required placeholder="0">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label d-block">Estado del Producto</label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="estado" id="estadoDisponible" value="disponible" checked>
+                                        <label class="form-check-label" for="estadoDisponible">Disponible</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="estado" id="estadoAgotado" value="agotado">
+                                        <label class="form-check-label" for="estadoAgotado">Agotado</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="estado" id="estadoPreorden" value="preorden">
+                                        <label class="form-check-label" for="estadoPreorden">Pre-orden</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Imagen del Producto -->
+                            <div class="form-section">
+                                <h4 class="form-section-title">Imagen del Producto</h4>
+                                <div class="mb-3">
+                                    <div class="image-preview-container mb-3" id="imagePreviewContainer">
+                                        <div class="image-placeholder" id="imagePlaceholder">
+                                            <i class="fas fa-image"></i>
+                                            <p>Haz clic para seleccionar una imagen o arrastra y suelta aquí</p>
+                                        </div>
+                                        <img id="imagePreview" class="image-preview d-none" alt="Vista previa de la imagen">
+                                    </div>
+                                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
+                                    <div class="form-text">Formatos aceptados: JPG, PNG, GIF. Tamaño máximo: 5MB.</div>
+                                </div>
+                            </div>
+
+                            <!-- Botones de Acción -->
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-comic-secondary" onclick="resetForm()">
+                                    <i class="fas fa-times me-2"></i>Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-comic-primary">
+                                    <i class="fas fa-save me-2"></i>Registrar Producto
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <!-- Tarjeta de Vista Previa -->
+                <div class="card form-card sticky-top" style="top: 100px;">
+                    <div class="form-header">
+                        <h2><i class="fas fa-eye me-2"></i>Vista Previa</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="card product-card h-100 mb-3">
+                            <div class="badge-stock" id="previewBadge">En Stock</div>
+                            <img src="/placeholder.svg?height=300&width=400" class="card-img-top" alt="Vista previa del producto" id="previewImage" style="height: 200px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="product-category" id="previewCategory">Categoría</span>
+                                    <small class="text-muted" id="previewSupplier">Proveedor</small>
+                                </div>
+                                <h5 class="product-title" id="previewTitle">Nombre del Producto</h5>
+                                <p class="card-text" id="previewDescription">Descripción del producto...</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <span class="product-price" id="previewPrice">$0.00</span>
+                                    <button class="btn btn-sm btn-comic-primary">
+                                        <i class="fas fa-shopping-cart me-1"></i>Añadir
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Nota:</strong> Esta es una vista previa de cómo se verá tu producto en el catálogo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- Footer -->
+ <footer class="footer-comic mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <h5 class="text-uppercase mb-4">Comic World</h5>
+                <p>Tu tienda especializada en cómics y figuras de colección, con las mejores novedades y exclusivos para los verdaderos fans.</p>
+            </div>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <h5 class="text-uppercase mb-4">Enlaces rápidos</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Catálogo</a></li>
+                    <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Novedades</a></li>
+                    <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Ofertas</a></li>
+                    <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h5 class="text-uppercase mb-4">Síguenos</h5>
+                <div class="d-flex">
+                    <a href="#" class="me-3 fs-4"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="me-3 fs-4"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="me-3 fs-4"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="fs-4"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4 bg-light">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0">&copy; 2025 Comic World. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                <a href="#" class="text-white me-3">Términos y Condiciones</a>
+                <a href="#" class="text-white">Privacidad</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Función para mostrar la vista previa de la imagen
+        document.getElementById('imagen').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imagePreview = document.getElementById('imagePreview');
+                    const imagePlaceholder = document.getElementById('imagePlaceholder');
+                    const previewImage = document.getElementById('previewImage');
+                    
+                    imagePreview.src = e.target.result;
+                    previewImage.src = e.target.result;
+                    
+                    imagePreview.classList.remove('d-none');
+                    imagePlaceholder.classList.add('d-none');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Permitir arrastrar y soltar imágenes
+        const dropArea = document.getElementById('imagePreviewContainer');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dropArea.classList.add('border-primary');
+        }
+        
+        function unhighlight() {
+            dropArea.classList.remove('border-primary');
+        }
+        
+        dropArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length) {
+                document.getElementById('imagen').files = files;
+                const event = new Event('change');
+                document.getElementById('imagen').dispatchEvent(event);
+            }
+        }
+
+        // Actualizar la vista previa en tiempo real
+        document.getElementById('nombre').addEventListener('input', function(e) {
+            document.getElementById('previewTitle').textContent = e.target.value || 'Nombre del Producto';
+        });
+        
+        document.getElementById('descripcion').addEventListener('input', function(e) {
+            document.getElementById('previewDescription').textContent = e.target.value || 'Descripción del producto...';
+        });
+        
+        document.getElementById('precio').addEventListener('input', function(e) {
+            document.getElementById('previewPrice').textContent = '$' + (parseFloat(e.target.value) || 0).toFixed(2);
+        });
+        
+        document.getElementById('categoria').addEventListener('change', function(e) {
+            const categoriaTexto = e.target.options[e.target.selectedIndex].text;
+            document.getElementById('previewCategory').textContent = categoriaTexto;
+        });
+        
+        document.getElementById('proveedor').addEventListener('change', function(e) {
+            const proveedorTexto = e.target.options[e.target.selectedIndex].text;
+            document.getElementById('previewSupplier').textContent = proveedorTexto;
+        });
+        
+        // Actualizar el estado del producto
+        document.querySelectorAll('input[name="estado"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const badge = document.getElementById('previewBadge');
+                badge.className = 'badge-stock';
+                
+                if (this.value === 'disponible') {
+                    badge.textContent = 'En Stock';
+                } else if (this.value === 'agotado') {
+                    badge.textContent = 'Agotado';
+                    badge.classList.add('badge-sold-out');
+                } else if (this.value === 'preorden') {
+                    badge.textContent = 'Pre-orden';
+                    badge.classList.add('badge-limited');
+                }
+            });
+        });
+        
+        // Función para resetear el formulario
+        function resetForm() {
+            document.getElementById('productForm').reset();
+            
+            // Resetear la vista previa de la imagen
+            document.getElementById('imagePreview').classList.add('d-none');
+            document.getElementById('imagePlaceholder').classList.remove('d-none');
+            document.getElementById('previewImage').src = '/placeholder.svg?height=300&width=400';
+            
+            // Resetear la vista previa del producto
+            document.getElementById('previewTitle').textContent = 'Nombre del Producto';
+            document.getElementById('previewDescription').textContent = 'Descripción del producto...';
+            document.getElementById('previewPrice').textContent = '$0.00';
+            document.getElementById('previewCategory').textContent = 'Categoría';
+            document.getElementById('previewSupplier').textContent = 'Proveedor';
+            
+            // Resetear el badge
+            const badge = document.getElementById('previewBadge');
+            badge.className = 'badge-stock';
+            badge.textContent = 'En Stock';
+        }
+        
+        // Manejar el envío del formulario
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Aquí iría la lógica para enviar los datos al servidor
+            // Por ahora, solo mostraremos un mensaje de éxito
+            alert('¡Producto registrado con éxito!');
+            resetForm();
+        });
+    </script>
 </body>
 </html>
