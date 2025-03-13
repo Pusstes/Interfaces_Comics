@@ -1,41 +1,1027 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empleados Registrados</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Gestión de Proveedores - Comic World</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Static/CSS/styles.css">
+    <style>
+
+        #navbar-admin {
+            background: linear-gradient(135deg, var(--dark-bg), var(--secondary-color));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          }
+        
+        :root {
+            --primary-color: #dc3545;
+            --secondary-color: #6c757d;
+            --accent-color: #ffc107;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .navbar-comic {
+            background: linear-gradient(135deg, #dc3545, #9f1f2c);
+        }
+        
+        .btn-comic-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-comic-primary:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        
+        .btn-comic-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-comic-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        
+        .btn-comic-accent {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #212529;
+        }
+        
+        .btn-comic-accent:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+        
+        .product-card {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .table-comic th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .table-comic tbody tr {
+            transition: background-color 0.2s ease;
+        }
+        
+        .table-comic tbody tr:hover {
+            background-color: rgba(220, 53, 69, 0.05);
+        }
+        
+        .footer-comic {
+            background: linear-gradient(135deg, #343a40, #212529);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-comic a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-comic a:hover {
+            color: white;
+        }
+        
+        .animated-element {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #dc3545, #9f1f2c);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .modal-title {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+        }
+        
+        .supplier-badge {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .supplier-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .supplier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .supplier-card .card-header {
+            background: linear-gradient(135deg, #dc3545, #9f1f2c);
+            color: white;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+            padding: 15px;
+        }
+        
+        .supplier-card .card-body {
+            padding: 20px;
+        }
+        
+        .supplier-info {
+            margin-bottom: 10px;
+        }
+        
+        .supplier-info i {
+            width: 20px;
+            color: #dc3545;
+            margin-right: 8px;
+        }
+        
+        .page-item.active .page-link {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .page-link {
+            color: #dc3545;
+        }
+    </style>
 </head>
-
 <body>
-    <form action="/buscarMedico" method="POST" class="mt-4">
-        <div class="container mt-5">
-            <h2 class="text-center">Proveedores Registrados</h2>
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Nombre de la empresa</th>
-                        <th>Nombre delencargado</th>
-                        <th>Correo</th>
-                        <th>Teléfono</th>
-                        <th>Teléfono personal.</th>
-                        <th>Dirección</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>  
-    </form> 
-    <div class="container mt-5">
-        <button class="btn btn-success">Home</button>
+    <!-- Navbar Administrador -->
+    <nav id="navbar-admin" class="navbar navbar-expand-lg navbar-dark navbar-comic sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/home.html">
+                <i class="fas fa-book-open me-2"></i>Comic World
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAdmin">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAdmin">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-box-open me-1"></i>Productos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/CRUD_Productos/ConsultaDeProductos.html"><i class="fas fa-clipboard-list me-2"></i>Stock Tienda</a></li>
+                            <li><a class="dropdown-item" href="/CRUD_Productos/RegistroDeProducto.html"><i class="fas fa-plus me-2"></i>Registrar Producto</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-users me-1"></i>Empleados
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus me-2"></i>Registrar Empleado</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-clipboard-list me-2"></i>Consultar Empleados</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-truck me-1"></i>Proveedores
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-list me-2"></i>Lista de Proveedores</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus me-2"></i>Dar de Alta Proveedor</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-shopping-cart me-1"></i>Pedidos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-truck-loading me-2"></i>Pedidos a Proveedor</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-users me-2"></i>Pedidos a Cliente</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-check-circle me-2"></i>Pedidos Realizados</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-light" href="#">
+                            <i class="fas fa-sign-out-alt me-1"></i>Salir
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container mt-5 animated-element">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h2 class="mb-3"><i class="fas fa-truck me-2 text-primary"></i>Gestión de Proveedores</h2>
+                <p class="text-muted">Administra los proveedores de tu tienda para mantener actualizado tu catálogo de productos.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <button class="btn btn-comic-primary" data-bs-toggle="modal" data-bs-target="#nuevoProveedorModal">
+                    <i class="fas fa-plus-circle me-2"></i>Nuevo Proveedor
+                </button>
+                <a href="/home.html" class="btn btn-comic-secondary">
+                    <i class="fas fa-home me-2"></i>Regresar al Inicio
+                </a>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="card mb-4 product-card">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><i class="fas fa-filter me-2"></i>Filtros</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Nombre de la Empresa</label>
+                        <input type="text" class="form-control" placeholder="Buscar por nombre...">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Categoría</label>
+                        <select class="form-select">
+                            <option value="">Todas las categorías</option>
+                            <option value="comics">Cómics</option>
+                            <option value="figuras">Figuras</option>
+                            <option value="mangas">Mangas</option>
+                            <option value="merchandising">Merchandising</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Estado</label>
+                        <select class="form-select">
+                            <option value="">Todos los estados</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="text-end mt-3">
+                    <button class="btn btn-comic-accent">
+                        <i class="fas fa-search me-1"></i>Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vista de Tarjetas de Proveedores -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5><i class="fas fa-th-large me-2"></i>Vista de Tarjetas</h5>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary active me-2">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <!-- Proveedor 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="supplier-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">DC Comics</h5>
+                        <span class="supplier-badge">Cómics</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="supplier-info">
+                            <i class="fas fa-user"></i>
+                            <span>Jim Lee (Encargado)</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-envelope"></i>
+                            <span>contacto@dccomics.com</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-phone"></i>
+                            <span>(555) 123-4567</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>(555) 987-6543</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>1700 Broadway, New York, NY 10019</span>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <button class="btn btn-sm btn-comic-secondary me-2" data-bs-toggle="modal" data-bs-target="#verProveedorModal" onclick="verProveedor(1)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-comic-primary me-2" data-bs-toggle="modal" data-bs-target="#editarProveedorModal" onclick="editarProveedor(1)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarProveedor(1)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proveedor 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="supplier-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Marvel Entertainment</h5>
+                        <span class="supplier-badge">Cómics</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="supplier-info">
+                            <i class="fas fa-user"></i>
+                            <span>Kevin Feige (Encargado)</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-envelope"></i>
+                            <span>ventas@marvel.com</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-phone"></i>
+                            <span>(555) 234-5678</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>(555) 876-5432</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>10 E 40th St, New York, NY 10016</span>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <button class="btn btn-sm btn-comic-secondary me-2" data-bs-toggle="modal" data-bs-target="#verProveedorModal" onclick="verProveedor(2)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-comic-primary me-2" data-bs-toggle="modal" data-bs-target="#editarProveedorModal" onclick="editarProveedor(2)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarProveedor(2)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proveedor 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="supplier-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Bandai Namco</h5>
+                        <span class="supplier-badge">Figuras</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="supplier-info">
+                            <i class="fas fa-user"></i>
+                            <span>Satoshi Oshita (Encargado)</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-envelope"></i>
+                            <span>distribuidores@bandai.jp</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-phone"></i>
+                            <span>(81) 3-5783-5500</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>(81) 3-5783-5501</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>4-5-15 Higashi-Shinagawa, Tokyo</span>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <button class="btn btn-sm btn-comic-secondary me-2" data-bs-toggle="modal" data-bs-target="#verProveedorModal" onclick="verProveedor(3)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-comic-primary me-2" data-bs-toggle="modal" data-bs-target="#editarProveedorModal" onclick="editarProveedor(3)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarProveedor(3)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proveedor 4 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="supplier-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Dark Horse Comics</h5>
+                        <span class="supplier-badge">Cómics</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="supplier-info">
+                            <i class="fas fa-user"></i>
+                            <span>Mike Richardson (Encargado)</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-envelope"></i>
+                            <span>ventas@darkhorse.com</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-phone"></i>
+                            <span>(541) 278-1345</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>(541) 278-1346</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>10956 SE Main St, Milwaukie, OR 97222</span>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <button class="btn btn-sm btn-comic-secondary me-2" data-bs-toggle="modal" data-bs-target="#verProveedorModal" onclick="verProveedor(4)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-comic-primary me-2" data-bs-toggle="modal" data-bs-target="#editarProveedorModal" onclick="editarProveedor(4)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarProveedor(4)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proveedor 5 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="supplier-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">McFarlane Toys</h5>
+                        <span class="supplier-badge">Figuras</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="supplier-info">
+                            <i class="fas fa-user"></i>
+                            <span>Todd McFarlane (Encargado)</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-envelope"></i>
+                            <span>distribuidores@mcfarlane.com</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-phone"></i>
+                            <span>(480) 491-7070</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>(480) 491-7071</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>7601 E McKellips Rd, Tempe, AZ 85281</span>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <button class="btn btn-sm btn-comic-secondary me-2" data-bs-toggle="modal" data-bs-target="#verProveedorModal" onclick="verProveedor(5)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-comic-primary me-2" data-bs-toggle="modal" data-bs-target="#editarProveedorModal" onclick="editarProveedor(5)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarProveedor(5)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proveedor 6 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="supplier-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Viz Media</h5>
+                        <span class="supplier-badge">Mangas</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="supplier-info">
+                            <i class="fas fa-user"></i>
+                            <span>Ken Sasaki (Encargado)</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-envelope"></i>
+                            <span>distribuidores@vizmedia.com</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-phone"></i>
+                            <span>(415) 546-7073</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>(415) 546-7074</span>
+                        </div>
+                        <div class="supplier-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>1355 Market St, San Francisco, CA 94103</span>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <button class="btn btn-sm btn-comic-secondary me-2" data-bs-toggle="modal" data-bs-target="#verProveedorModal" onclick="verProveedor(6)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-comic-primary me-2" data-bs-toggle="modal" data-bs-target="#editarProveedorModal" onclick="editarProveedor(6)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarProveedor(6)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paginación -->
+        <nav aria-label="Page navigation" class="mt-4 mb-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Siguiente</a>
+                </li>
+            </ul>
+        </nav>
     </div>
+    
+    <!-- Modal Nuevo Proveedor -->
+    <div class="modal fade" id="nuevoProveedorModal" tabindex="-1" aria-labelledby="nuevoProveedorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nuevoProveedorModalLabel"><i class="fas fa-plus-circle me-2"></i>Nuevo Proveedor</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="nuevoProveedorForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nombreEmpresa" class="form-label">Nombre de la Empresa</label>
+                                <input type="text" class="form-control" id="nombreEmpresa" required placeholder="Ej: Editorial Planeta">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="categoriaProveedor" class="form-label">Categoría</label>
+                                <select class="form-select" id="categoriaProveedor" required>
+                                    <option value="">Seleccionar categoría</option>
+                                    <option value="comics">Cómics</option>
+                                    <option value="figuras">Figuras</option>
+                                    <option value="mangas">Mangas</option>
+                                    <option value="merchandising">Merchandising</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nombreEncargado" class="form-label">Nombre del Encargado</label>
+                                <input type="text" class="form-control" id="nombreEncargado" required placeholder="Ej: Juan Pérez">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="correoProveedor" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="correoProveedor" required placeholder="Ej: contacto@empresa.com">
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="telefonoProveedor" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="telefonoProveedor" required placeholder="Ej: (555) 123-4567">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telefonoPersonal" class="form-label">Teléfono Personal</label>
+                                <input type="tel" class="form-control" id="telefonoPersonal" placeholder="Ej: (555) 987-6543">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="direccionProveedor" class="form-label">Dirección</label>
+                            <textarea class="form-control" id="direccionProveedor" rows="3" required placeholder="Dirección completa del proveedor"></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="notasProveedor" class="form-label">Notas Adicionales</label>
+                            <textarea class="form-control" id="notasProveedor" rows="2" placeholder="Información adicional sobre el proveedor..."></textarea>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="proveedorActivo" checked>
+                            <label class="form-check-label" for="proveedorActivo">
+                                Proveedor activo
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-comic-primary" onclick="guardarNuevoProveedor()">Guardar Proveedor</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Editar Proveedor -->
+    <div class="modal fade" id="editarProveedorModal" tabindex="-1" aria-labelledby="editarProveedorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarProveedorModalLabel"><i class="fas fa-edit me-2"></i>Editar Proveedor</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarProveedorForm">
+                        <input type="hidden" id="idProveedorEdit">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nombreEmpresaEdit" class="form-label">Nombre de la Empresa</label>
+                                <input type="text" class="form-control" id="nombreEmpresaEdit" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="categoriaProveedorEdit" class="form-label">Categoría</label>
+                                <select class="form-select" id="categoriaProveedorEdit" required>
+                                    <option value="">Seleccionar categoría</option>
+                                    <option value="comics">Cómics</option>
+                                    <option value="figuras">Figuras</option>
+                                    <option value="mangas">Mangas</option>
+                                    <option value="merchandising">Merchandising</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nombreEncargadoEdit" class="form-label">Nombre del Encargado</label>
+                                <input type="text" class="form-control" id="nombreEncargadoEdit" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="correoProveedorEdit" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="correoProveedorEdit" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="telefonoProveedorEdit" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="telefonoProveedorEdit" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telefonoPersonalEdit" class="form-label">Teléfono Personal</label>
+                                <input type="tel" class="form-control" id="telefonoPersonalEdit">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="direccionProveedorEdit" class="form-label">Dirección</label>
+                            <textarea class="form-control" id="direccionProveedorEdit" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="notasProveedorEdit" class="form-label">Notas Adicionales</label>
+                            <textarea class="form-control" id="notasProveedorEdit" rows="2"></textarea>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="proveedorActivoEdit">
+                            <label class="form-check-label" for="proveedorActivoEdit">
+                                Proveedor activo
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-comic-primary" onclick="actualizarProveedor()">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ver Detalles del Proveedor -->
+    <div class="modal fade" id="verProveedorModal" tabindex="-1" aria-labelledby="verProveedorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: var(--secondary-color);">
+                    <h5 class="modal-title" id="verProveedorModalLabel"><i class="fas fa-eye me-2"></i>Detalles del Proveedor</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-primary"><i class="fas fa-building me-2"></i>Información de la Empresa</h6>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <p><strong>Nombre:</strong> <span id="verNombreEmpresa">DC Comics</span></p>
+                                    <p><strong>Categoría:</strong> <span id="verCategoria">Cómics</span></p>
+                                    <p><strong>Estado:</strong> <span id="verEstado" class="badge bg-success">Activo</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary"><i class="fas fa-user me-2"></i>Información de Contacto</h6>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <p><strong>Encargado:</strong> <span id="verEncargado">Jim Lee</span></p>
+                                    <p><strong>Correo:</strong> <span id="verCorreo">contacto@dccomics.com</span></p>
+                                    <p><strong>Teléfono:</strong> <span id="verTelefono">(555) 123-4567</span></p>
+                                    <p><strong>Teléfono Personal:</strong> <span id="verTelefonoPersonal">(555) 987-6543</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h6 class="text-primary"><i class="fas fa-map-marker-alt me-2"></i>Dirección</h6>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p id="verDireccion">1700 Broadway, New York, NY 10019</p>
+                        </div>
+                    </div>
+                    
+                    <h6 class="text-primary"><i class="fas fa-sticky-note me-2"></i>Notas Adicionales</h6>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p id="verNotas">Proveedor principal de cómics DC. Envíos semanales los martes.</p>
+                        </div>
+                    </div>
+                    
+                    <h6 class="text-primary"><i class="fas fa-history me-2"></i>Historial de Pedidos</h6>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Nº Pedido</th>
+                                    <th>Fecha</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historialPedidos">
+                                <tr>
+                                    <td>#2001</td>
+                                    <td>15/02/2025</td>
+                                    <td>$3,450.00</td>
+                                    <td><span class="badge bg-primary">Confirmado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#1985</td>
+                                    <td>10/01/2025</td>
+                                    <td>$2,780.50</td>
+                                    <td><span class="badge bg-success">Recibido</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#1876</td>
+                                    <td>05/12/2024</td>
+                                    <td>$4,120.75</td>
+                                    <td><span class="badge bg-success">Recibido</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-comic-primary" data-bs-toggle="modal" data-bs-target="#nuevoPedidoModal" data-bs-dismiss="modal">
+                        <i class="fas fa-plus-circle me-2"></i>Crear Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-comic mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase mb-4">Comic World</h5>
+                    <p>Tu tienda especializada en cómics y figuras de colección, con las mejores novedades y exclusivos para los verdaderos fans.</p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase mb-4">Enlaces rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Catálogo</a></li>
+                        <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Novedades</a></li>
+                        <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Ofertas</a></li>
+                        <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-uppercase mb-4">Síguenos</h5>
+                    <div class="d-flex">
+                        <a href="#" class="me-3 fs-4"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="me-3 fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-3 fs-4"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-4"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Comic World. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-white me-3">Términos y Condiciones</a>
+                    <a href="#" class="text-white">Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Datos de ejemplo para los proveedores
+        const proveedores = [
+            {
+                id: 1,
+                nombre: "DC Comics",
+                categoria: "Cómics",
+                encargado: "Jim Lee",
+                correo: "contacto@dccomics.com",
+                telefono: "(555) 123-4567",
+                telefonoPersonal: "(555) 987-6543",
+                direccion: "1700 Broadway, New York, NY 10019",
+                notas: "Proveedor principal de cómics DC. Envíos semanales los martes.",
+                activo: true
+            },
+            {
+                id: 2,
+                nombre: "Marvel Entertainment",
+                categoria: "Cómics",
+                encargado: "Kevin Feige",
+                correo: "ventas@marvel.com",
+                telefono: "(555) 234-5678",
+                telefonoPersonal: "(555) 876-5432",
+                direccion: "10 E 40th St, New York, NY 10016",
+                notas: "Proveedor principal de cómics Marvel. Descuentos por volumen.",
+                activo: true
+            },
+            {
+                id: 3,
+                nombre: "Bandai Namco",
+                categoria: "Figuras",
+                encargado: "Satoshi Oshita",
+                correo: "distribuidores@bandai.jp",
+                telefono: "(81) 3-5783-5500",
+                telefonoPersonal: "(81) 3-5783-5501",
+                direccion: "4-5-15 Higashi-Shinagawa, Tokyo",
+                notas: "Proveedor de figuras de anime y videojuegos. Pedidos con 3 meses de anticipación.",
+                activo: true
+            }
+        ];
+
+        // Función para ver detalles de un proveedor
+        function verProveedor(id) {
+            const proveedor = proveedores.find(p => p.id === id) || proveedores[0];
+            
+            document.getElementById('verNombreEmpresa').textContent = proveedor.nombre;
+            document.getElementById('verCategoria').textContent = proveedor.categoria;
+            document.getElementById('verEstado').textContent = proveedor.activo ? 'Activo' : 'Inactivo';
+            document.getElementById('verEstado').className = proveedor.activo ? 'badge bg-success' : 'badge bg-danger';
+            
+            document.getElementById('verEncargado').textContent = proveedor.encargado;
+            document.getElementById('verCorreo').textContent = proveedor.correo;
+            document.getElementById('verTelefono').textContent = proveedor.telefono;
+            document.getElementById('verTelefonoPersonal').textContent = proveedor.telefonoPersonal;
+            
+            document.getElementById('verDireccion').textContent = proveedor.direccion;
+            document.getElementById('verNotas').textContent = proveedor.notas || 'No hay notas adicionales.';
+            
+            // Actualizar el título del modal
+            document.getElementById('verProveedorModalLabel').innerHTML = `<i class="fas fa-eye me-2"></i>Detalles del Proveedor: ${proveedor.nombre}`;
+        }
+
+        // Función para editar un proveedor
+        function editarProveedor(id) {
+            const proveedor = proveedores.find(p => p.id === id) || proveedores[0];
+            
+            document.getElementById('idProveedorEdit').value = proveedor.id;
+            document.getElementById('nombreEmpresaEdit').value = proveedor.nombre;
+            document.getElementById('categoriaProveedorEdit').value = proveedor.categoria.toLowerCase();
+            document.getElementById('nombreEncargadoEdit').value = proveedor.encargado;
+            document.getElementById('correoProveedorEdit').value = proveedor.correo;
+            document.getElementById('telefonoProveedorEdit').value = proveedor.telefono;
+            document.getElementById('telefonoPersonalEdit').value = proveedor.telefonoPersonal;
+            document.getElementById('direccionProveedorEdit').value = proveedor.direccion;
+            document.getElementById('notasProveedorEdit').value = proveedor.notas || '';
+            document.getElementById('proveedorActivoEdit').checked = proveedor.activo;
+            
+            // Actualizar el título del modal
+            document.getElementById('editarProveedorModalLabel').innerHTML = `<i class="fas fa-edit me-2"></i>Editar Proveedor: ${proveedor.nombre}`;
+        }
+
+        // Función para eliminar un proveedor
+        function eliminarProveedor(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
+                // Aquí iría la lógica para eliminar el proveedor
+                console.log(`Proveedor con ID ${id} eliminado`);
+                alert('Proveedor eliminado correctamente');
+            }
+        }
+
+        // Función para guardar un nuevo proveedor
+        function guardarNuevoProveedor() {
+            const form = document.getElementById('nuevoProveedorForm');
+            if (form.checkValidity()) {
+                // Aquí iría la lógica para guardar el nuevo proveedor
+                const nuevoProveedor = {
+                    id: proveedores.length + 1,
+                    nombre: document.getElementById('nombreEmpresa').value,
+                    categoria: document.getElementById('categoriaProveedor').options[document.getElementById('categoriaProveedor').selectedIndex].text,
+                    encargado: document.getElementById('nombreEncargado').value,
+                    correo: document.getElementById('correoProveedor').value,
+                    telefono: document.getElementById('telefonoProveedor').value,
+                    telefonoPersonal: document.getElementById('telefonoPersonal').value,
+                    direccion: document.getElementById('direccionProveedor').value,
+                    notas: document.getElementById('notasProveedor').value,
+                    activo: document.getElementById('proveedorActivo').checked
+                };
+                
+                console.log('Nuevo proveedor:', nuevoProveedor);
+                alert('Proveedor guardado correctamente');
+                
+                // Cerrar el modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('nuevoProveedorModal'));
+                modal.hide();
+                
+                // Limpiar el formulario
+                form.reset();
+            } else {
+                form.reportValidity();
+            }
+        }
+
+        // Función para actualizar un proveedor
+        function actualizarProveedor() {
+            const form = document.getElementById('editarProveedorForm');
+            if (form.checkValidity()) {
+                const id = parseInt(document.getElementById('idProveedorEdit').value);
+                const proveedorIndex = proveedores.findIndex(p => p.id === id);
+                
+                if (proveedorIndex !== -1) {
+                    // Actualizar los datos del proveedor
+                    const proveedorActualizado = {
+                        id: id,
+                        nombre: document.getElementById('nombreEmpresaEdit').value,
+                        categoria: document.getElementById('categoriaProveedorEdit').options[document.getElementById('categoriaProveedorEdit').selectedIndex].text,
+                        encargado: document.getElementById('nombreEncargadoEdit').value,
+                        correo: document.getElementById('correoProveedorEdit').value,
+                        telefono: document.getElementById('telefonoProveedorEdit').value,
+                        telefonoPersonal: document.getElementById('telefonoPersonalEdit').value,
+                        direccion: document.getElementById('direccionProveedorEdit').value,
+                        notas: document.getElementById('notasProveedorEdit').value,
+                        activo: document.getElementById('proveedorActivoEdit').checked
+                    };
+                    
+                    console.log('Proveedor actualizado:', proveedorActualizado);
+                    alert('Proveedor actualizado correctamente');
+                    
+                    // Cerrar el modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editarProveedorModal'));
+                    modal.hide();
+                }
+            } else {
+                form.reportValidity();
+            }
+        }
+    </script>
 </body>
-
-
 </html>
