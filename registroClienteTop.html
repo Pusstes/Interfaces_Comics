@@ -1,28 +1,324 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Cliente TOP</title>
+    <title>Clientes TOP - Comic World</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Static/CSS/styles.css">
 </head>
 <body>
-    <div class="container mt-4">
-        <h2>Registrar Cliente TOP</h2>
-        <form>
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre">
+    <!-- Navbar Administrador -->
+    <nav id="navbar-admin" class="navbar navbar-expand-lg navbar-dark navbar-comic sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/home.html">
+                <i class="fas fa-book-open me-2"></i>Comic World
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAdmin">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAdmin">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-box-open me-1"></i>Productos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/CRUD_Productos/ConsultaDeProductos.html"><i class="fas fa-clipboard-list me-2"></i>Stock Tienda</a></li>
+                            <li><a class="dropdown-item" href="/CRUD_Productos/RegistroDeProducto.html"><i class="fas fa-plus me-2"></i>Registrar Producto</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-users me-1"></i>Empleados
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/CRUD_Empleados/RegistroUsuario.html"><i class="fas fa-user-plus me-2"></i>Registrar Empleado</a></li>
+                            <li><a class="dropdown-item" href="/CRUD_Empleados/ConsultaEmpleados.html"><i class="fas fa-clipboard-list me-2"></i>Consultar Empleados</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-truck me-1"></i>Proveedores
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/CRUD_Proveedores/ConsultaProveedores.html"><i class="fas fa-list me-2"></i>Lista de Proveedores</a></li>
+                            <li><a class="dropdown-item" href="/CRUD_Proveedores/RegistroProveedor.html"><i class="fas fa-user-plus me-2"></i>Dar de Alta Proveedor</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-shopping-cart me-1"></i>Pedidos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/CRUD_Pedidos_CyP/ConsultaPedidosProveedor.html"><i class="fas fa-truck-loading me-2"></i>Pedidos a Proveedor</a></li>
+                            <li><a class="dropdown-item" href="/CRUD_Pedidos_CyP/ConsultaPedidosCliente.html"><i class="fas fa-users me-2"></i>Pedidos a Cliente</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-check-circle me-2"></i>Pedidos Realizados</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-light" href="#">
+                            <i class="fas fa-sign-out-alt me-1"></i>Salir
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div class="mb-3">
-                <label for="correo" class="form-label">Correo</label>
-                <input type="email" class="form-control" id="correo">
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container mt-5 animated-element">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2 class="mb-3"><i class="fas fa-users me-2 text-primary"></i>Clientes TOP</h2>
+                <p class="text-muted">Gestiona los clientes TOP que tienen beneficios exclusivos en Comic World.</p>
             </div>
-            <button type="submit" class="btn btn-primary">Registrar</button>
-            <button type="reset" class="btn btn-secondary">Cancelar</button>
-        </form>
+            <div class="col-md-4 text-md-end">
+                <button class="btn btn-comic-primary" data-bs-toggle="modal" data-bs-target="#agregarClienteModal">
+                    <i class="fas fa-user-plus me-2"></i>Nuevo Cliente TOP
+                </button>
+                <a href="/home.html" class="btn btn-comic-secondary">
+                    <i class="fas fa-home me-2"></i>Regresar al Inicio
+                </a>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="card mb-4 product-card">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><i class="fas fa-filter me-2"></i>Filtros</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" placeholder="Buscar por nombre...">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Correo</label>
+                        <input type="email" class="form-control" placeholder="Buscar por correo...">
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <button class="btn btn-comic-accent">
+                            <i class="fas fa-search me-1"></i>Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Clientes TOP -->
+        <div class="card product-card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-comic table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col"><i class="fas fa-id-card me-1"></i>ID</th>
+                                <th scope="col"><i class="fas fa-user me-1"></i>Nombre</th>
+                                <th scope="col"><i class="fas fa-envelope me-1"></i>Correo</th>
+                                <th scope="col"><i class="fas fa-phone me-1"></i>Teléfono</th>
+                                <th scope="col"><i class="fas fa-map-marker-alt me-1"></i>Dirección</th>
+                                <th scope="col"><i class="fas fa-cogs me-1"></i>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Ejemplo de filas, estas se reemplazarían con datos dinámicos -->
+                            <tr>
+                                <td>CT001</td>
+                                <td>Juan Pérez González</td>
+                                <td>juan.perez@example.com</td>
+                                <td>555-1234</td>
+                                <td>Calle Falsa 123</td>
+                                <td>
+                                    <button class="btn btn-sm btn-comic-secondary" data-bs-toggle="modal" data-bs-target="#editarClienteModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CT002</td>
+                                <td>María López Sánchez</td>
+                                <td>maria.lopez@example.com</td>
+                                <td>555-5678</td>
+                                <td>Avenida Siempre Viva 456</td>
+                                <td>
+                                    <button class="btn btn-sm btn-comic-secondary" data-bs-toggle="modal" data-bs-target="#editarClienteModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CT003</td>
+                                <td>Carlos Rodríguez Martínez</td>
+                                <td>carlos.rodriguez@example.com</td>
+                                <td>555-9101</td>
+                                <td>Boulevard de los Sueños 789</td>
+                                <td>
+                                    <button class="btn btn-sm btn-comic-secondary" data-bs-toggle="modal" data-bs-target="#editarClienteModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Paginación -->
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
-    
+
+    <!-- Modal para agregar cliente TOP -->
+    <div class="modal fade" id="agregarClienteModal" tabindex="-1" aria-labelledby="agregarClienteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="agregarClienteModalLabel"><i class="fas fa-user-plus me-2"></i>Registrar Cliente TOP</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nombre" class="form-label"><i class="fas fa-user me-2"></i>Nombre</label>
+                                <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del cliente" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="correo" class="form-label"><i class="fas fa-envelope me-2"></i>Correo</label>
+                                <input type="email" class="form-control" id="correo" placeholder="Ingrese el correo del cliente" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="telefono" class="form-label"><i class="fas fa-phone me-2"></i>Teléfono</label>
+                                <input type="tel" class="form-control" id="telefono" placeholder="Ingrese el teléfono del cliente">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="direccion" class="form-label"><i class="fas fa-map-marker-alt me-2"></i>Dirección</label>
+                                <input type="text" class="form-control" id="direccion" placeholder="Ingrese la dirección del cliente">
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-comic-primary">
+                                <i class="fas fa-save me-2"></i>Registrar Cliente
+                            </button>
+                            <button type="reset" class="btn btn-comic-secondary">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar cliente TOP -->
+    <div class="modal fade" id="editarClienteModal" tabindex="-1" aria-labelledby="editarClienteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="editarClienteModalLabel"><i class="fas fa-edit me-2"></i>Editar Cliente TOP</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editNombre" class="form-label"><i class="fas fa-user me-2"></i>Nombre</label>
+                                <input type="text" class="form-control" id="editNombre" placeholder="Ingrese el nombre del cliente" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editCorreo" class="form-label"><i class="fas fa-envelope me-2"></i>Correo</label>
+                                <input type="email" class="form-control" id="editCorreo" placeholder="Ingrese el correo del cliente" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editTelefono" class="form-label"><i class="fas fa-phone me-2"></i>Teléfono</label>
+                                <input type="tel" class="form-control" id="editTelefono" placeholder="Ingrese el teléfono del cliente">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editDireccion" class="form-label"><i class="fas fa-map-marker-alt me-2"></i>Dirección</label>
+                                <input type="text" class="form-control" id="editDireccion" placeholder="Ingrese la dirección del cliente">
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-comic-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Cambios
+                            </button>
+                            <button type="reset" class="btn btn-comic-secondary">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-comic mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase mb-4">Comic World</h5>
+                    <p>Tu tienda especializada en cómics y figuras de colección, con las mejores novedades y exclusivos para los verdaderos fans.</p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase mb-4">Enlaces rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Catálogo</a></li>
+                        <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Novedades</a></li>
+                        <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Ofertas</a></li>
+                        <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-uppercase mb-4">Síguenos</h5>
+                    <div class="d-flex">
+                        <a href="#" class="me-3 fs-4"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="me-3 fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-3 fs-4"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-4"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Comic World. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-white me-3">Términos y Condiciones</a>
+                    <a href="#" class="text-white">Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
