@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Cliente TOP</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Realizar Venta</h2>
+        <form>
+            <div class="mb-3">
+                <label for="productoID" class="form-label">ID del Producto</label>
+                <input type="text" class="form-control" id="productoID">
+            </div>
+            <div class="mb-3">
+                <label for="cantidad" class="form-label">Cantidad</label>
+                <input type="number" class="form-control" id="cantidad">
+            </div>
+            <div class="mb-3">
+                <label for="cliente" class="form-label">Cliente TOP (Opcional)</label>
+                <select class="form-select" id="cliente">
+                    <option value="">Sin cliente</option>
+                    <option value="1">Cliente 1</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Confirmar Venta</button>
+            <button type="reset" class="btn btn-secondary">Cancelar</button>
+        </form>
+    </div>
+    
+</body>
+</html>
