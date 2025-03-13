@@ -1,35 +1,1030 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Cliente TOP</title>
+    <title>Venta de Productos - Comic World</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Static/CSS/styles.css">
+    <style>
+        :root {
+            --primary-color: #dc3545;
+            --secondary-color: #6c757d;
+            --accent-color: #ffc107;
+            --success-color: #28a745;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .navbar-comic {
+            background: linear-gradient(135deg, #dc3545, #9f1f2c);
+        }
+        
+        .btn-comic-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-comic-primary:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        
+        .btn-comic-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-comic-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        
+        .btn-comic-success {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-comic-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        
+        .card-comic {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-comic:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .card-header-comic {
+            background: linear-gradient(135deg, #dc3545, #9f1f2c);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+            padding: 15px 20px;
+        }
+        
+        .product-search-card {
+            height: calc(100vh - 180px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-list {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        
+        .product-item {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .product-item:hover {
+            background-color: rgba(220, 53, 69, 0.05);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .product-item.selected {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .cart-card {
+            height: calc(100vh - 180px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        
+        .cart-item {
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px 0;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .cart-summary {
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            border-radius: 0 0 10px 10px;
+            padding: 15px;
+        }
+        
+        .cart-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .badge-category {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.8rem;
+            padding: 5px 8px;
+            border-radius: 20px;
+        }
+        
+        .badge-stock {
+            background-color: var(--success-color);
+            color: white;
+            font-size: 0.8rem;
+            padding: 5px 8px;
+            border-radius: 5px;
+        }
+        
+        .badge-limited {
+            background-color: var(--accent-color);
+            color: #212529;
+        }
+        
+        .badge-sold-out {
+            background-color: var(--secondary-color);
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .product-details {
+            border-left: 1px solid #dee2e6;
+            height: 100%;
+            padding-left: 20px;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            font-weight: bold;
+        }
+        
+        .quantity-control input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            border-left: none;
+            border-right: none;
+            height: 30px;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .payment-method {
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        .payment-method i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .customer-info {
+            margin-bottom: 20px;
+        }
+        
+        .receipt-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .receipt-logo {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+        
+        .receipt-items {
+            margin-bottom: 20px;
+        }
+        
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .receipt-total {
+            border-top: 1px dashed #dee2e6;
+            padding-top: 10px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .receipt-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .receipt-barcode {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .receipt-barcode img {
+            max-width: 80%;
+            height: 40px;
+        }
+        
+        .animated-element {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Estilos para el cliente frecuente */
+        .frequent-customer {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .customer-points {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .customer-level {
+            background-color: var(--accent-color);
+            color: #212529;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h2>Realizar Venta</h2>
-        <form>
-            <div class="mb-3">
-                <label for="productoID" class="form-label">ID del Producto</label>
-                <input type="text" class="form-control" id="productoID">
+    <!-- Navbar Administrador -->
+<nav id="navbar-admin" class="navbar navbar-expand-lg navbar-dark navbar-comic sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/home.html">
+            <i class="fas fa-book-open me-2"></i>Comic World
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAdmin">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAdmin">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/RegistroVenta.html">
+                        <i class="fas fa-cash-register me-1"></i>Venta
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <i class="fas fa-box-open me-1"></i>Productos
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/CRUD_Productos/ConsultaDeProductos.html"><i class="fas fa-clipboard-list me-2"></i>Stock Tienda</a></li>
+                        <li><a class="dropdown-item" href="/CRUD_Productos/RegistroDeProducto.html"><i class="fas fa-plus me-2"></i>Registrar Producto</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/CRUD_Proveedores/ConsultaProveedores.html">
+                        <i class="fas fa-truck me-1"></i>Proveedores
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <i class="fas fa-shopping-cart me-1"></i>Pedidos
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/CRUD_Pedidos_CyP/ConsultaPedidosProveedor.html"><i class="fas fa-truck-loading me-2"></i>Pedidos a Proveedor</a></li>
+                        <li><a class="dropdown-item" href="/CRUD_Pedidos_CyP/ConsultaPedidosCliente.html"><i class="fas fa-users me-2"></i>Pedidos a Cliente</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/CRUD_Empleados/ConsultaEmpleados.html">
+                        <i class="fas fa-users me-1"></i>Empleados
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registroClienteTop.html">
+                        <i class="fas fa-trophy me-1"></i>Clientes Top
+                    </a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a class="btn btn-outline-light" href="#">
+                        <i class="fas fa-sign-out-alt me-1"></i>Salir
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!-- Contenido Principal -->
+    <div class="container-fluid py-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="mb-3"><i class="fas fa-cash-register me-2 text-primary"></i>Venta de Productos</h2>
+                <p class="text-muted">Registra ventas de productos a clientes en la tienda física.</p>
             </div>
-            <div class="mb-3">
-                <label for="cantidad" class="form-label">Cantidad</label>
-                <input type="number" class="form-control" id="cantidad">
+        </div>
+
+        <div class="row">
+            <!-- Búsqueda de Productos -->
+            <div class="col-md-5">
+                <div class="card card-comic product-search-card mb-4">
+                    <div class="card-header card-header-comic">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-search me-2"></i>Búsqueda de Productos</h5>
+                            <button class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#scannerModal">
+                                <i class="fas fa-barcode me-1"></i>Escanear
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="p-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Buscar por nombre, código o categoría..." id="searchInput">
+                                <button class="btn btn-comic-primary" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <button class="btn btn-sm btn-outline-secondary" onclick="filterProducts('all')">Todos</button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="filterProducts('comics')">Cómics</button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="filterProducts('figuras')">Figuras</button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="filterProducts('mangas')">Mangas</button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="filterProducts('coleccionables')">Coleccionables</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-list">
+                            <!-- Producto 1 -->
+                            <div class="product-item p-3" onclick="selectProduct(1)">
+                                <div class="d-flex">
+                                    <img src="/Static/IMG/home/dark_knight_rises_ver4.jpg" alt="Batman Comic" class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                    <div>
+                                        <h6 class="mb-1">Batman: The Dark Knight #1</h6>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <span class="badge-category me-2">Cómic</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="product-price">$60.00</span>
+                                            <span class="badge-stock">En Stock: 15</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 2 -->
+                            <div class="product-item p-3" onclick="selectProduct(2)">
+                                <div class="d-flex">
+                                    <img src="/Static/IMG/Comics/neon.jpg" alt="Figura Anime" class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                    <div>
+                                        <h6 class="mb-1">Rei ayanami + azuka</h6>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <span class="badge-category me-2">Figura</span>
+                                            <small class="text-muted">Namco</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="product-price">$1,500.00</span>
+                                            <span class="badge-stock">En Stock: 5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 3 -->
+                            <div class="product-item p-3" onclick="selectProduct(3)">
+                                <div class="d-flex">
+                                    <img src="/Static/IMG/home/spider_comic.jpg" alt="Spider-Man Comic" class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                    <div>
+                                        <h6 class="mb-1">The amazing Spiderman #4</h6>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <span class="badge-category me-2">Cómic</span>
+                                            <small class="text-muted">Marvel</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="product-price">$55.00</span>
+                                            <span class="badge-stock">En Stock: 20</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 4 -->
+                            <div class="product-item p-3" onclick="selectProduct(4)">
+                                <div class="d-flex">
+                                    <img src="/Static/IMG/Comics/4c.jpg" alt="Spider Woman Comic" class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                    <div>
+                                        <h6 class="mb-1">Spider Woman</h6>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <span class="badge-category me-2">Cómic</span>
+                                            <small class="text-muted">Marvel</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="product-price">$65.00</span>
+                                            <span class="badge-stock badge-sold-out">Agotado</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 5 -->
+                            <div class="product-item p-3" onclick="selectProduct(5)">
+                                <div class="d-flex">
+                                    <img src="/Static/IMG/home/exclusivasFiguras.jpeg" alt="Figura Anime" class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                    <div>
+                                        <h6 class="mb-1">Figura de una waifu</h6>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <span class="badge-category me-2">Figura</span>
+                                            <small class="text-muted">Bandai Namco</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="product-price">$799.00</span>
+                                            <span class="badge-stock">En Stock: 3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 6 -->
+                            <div class="product-item p-3" onclick="selectProduct(6)">
+                                <div class="d-flex">
+                                    <img src="/Static/IMG/Comics/superman.jpg" alt="Superman Comic" class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                    <div>
+                                        <h6 class="mb-1">Superman: Man of Tomorrow #5</h6>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <span class="badge-category me-2">Cómic</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="product-price">$12.99</span>
+                                            <span class="badge-stock">En Stock: 25</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 7 -->
+                            <div class="product-item p-3" onclick="selectProduct(7)">
+                                <div class="d-flex">
+                                    <img src="/Static/IMG/Comics/figuraDc.jpg" alt="DC Multiverse Figure" class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                    <div>
+                                        <h6 class="mb-1">DC multiverse</h6>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <span class="badge-category me-2">Figura</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="product-price">$1,500.00</span>
+                                            <span class="badge-stock">En Stock: 8</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="cliente" class="form-label">Cliente TOP (Opcional)</label>
-                <select class="form-select" id="cliente">
-                    <option value="">Sin cliente</option>
-                    <option value="1">Cliente 1</option>
-                </select>
+            
+            <!-- Detalles del Producto Seleccionado -->
+            <div class="col-md-3">
+                <div class="card card-comic mb-4" id="productDetails">
+                    <div class="card-header card-header-comic">
+                        <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Detalles del Producto</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="noProductSelected">
+                            <div class="text-center py-5">
+                                <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                                <p>Selecciona un producto para ver sus detalles</p>
+                            </div>
+                        </div>
+                        
+                        <div id="productDetailsContent" class="d-none">
+                            <div class="text-center mb-3">
+                                <img src="/placeholder.svg" alt="Producto" id="detailImage" class="img-fluid mb-3" style="max-height: 200px; object-fit: contain;">
+                                <h5 id="detailTitle" class="mb-2"></h5>
+                                <div class="d-flex justify-content-center align-items-center mb-2">
+                                    <span class="badge-category me-2" id="detailCategory"></span>
+                                    <small class="text-muted" id="detailSupplier"></small>
+                                </div>
+                                <div class="product-price mb-3" id="detailPrice"></div>
+                                <p class="text-muted" id="detailDescription"></p>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span>Disponibilidad:</span>
+                                <span class="badge-stock" id="detailStock"></span>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span>Código:</span>
+                                <span id="detailCode"></span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="quantity" class="form-label">Cantidad:</label>
+                                <div class="quantity-control">
+                                    <button type="button" onclick="decreaseQuantity()">-</button>
+                                    <input type="number" id="quantity" value="1" min="1" max="99">
+                                    <button type="button" onclick="increaseQuantity()">+</button>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-comic-primary w-100" onclick="addToCart()">
+                                <i class="fas fa-cart-plus me-2"></i>Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-success">Confirmar Venta</button>
-            <button type="reset" class="btn btn-secondary">Cancelar</button>
-        </form>
+            
+            <!-- Carrito de Compra -->
+            <div class="col-md-4">
+                <div class="card card-comic cart-card mb-4">
+                    <div class="card-header card-header-comic">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Carrito de Compra</h5>
+                            <button class="btn btn-sm btn-outline-light" onclick="clearCart()">
+                                <i class="fas fa-trash me-1"></i>Vaciar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="cart-items p-3" id="cartItems">
+                            <div class="text-center py-5" id="emptyCart">
+                                <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                                <p>El carrito está vacío</p>
+                            </div>
+                            
+                            <!-- Los items del carrito se agregarán dinámicamente aquí -->
+                        </div>
+                        
+                        <div class="cart-summary">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>IVA (16%):</span>
+                                <span id="tax">$0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Descuento:</span>
+                                <span id="discount">$0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">Total:</span>
+                                <span class="cart-total" id="total">$0.00</span>
+                            </div>
+                            
+                            <div class="d-grid gap-2 mt-3">
+                                <button class="btn btn-comic-success" data-bs-toggle="modal" data-bs-target="#checkoutModal" id="checkoutBtn" disabled>
+                                    <i class="fas fa-credit-card me-2"></i>Procesar Pago
+                                </button>
+                                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#customerSearchModal">
+                                    <i class="fas fa-user me-2"></i>Buscar Cliente
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
-</body>
-</html>
+    <!-- Modal Escanear Código de Barras -->
+    <div class="modal fade" id="scannerModal" tabindex="-1" aria-labelledby="scannerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scannerModalLabel"><i class="fas fa-barcode me-2"></i>Escanear Código de Barras</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-3">
+                        <div style="width: 100%; height: 200px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                            <i class="fas fa-camera fa-3x text-muted"></i>
+                        </div>
+                        <p class="text-muted mt-2">Coloca el código de barras frente a la cámara para escanear</p>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Código de barras" id="barcodeInput">
+                        <button class="btn btn-comic-primary" type="button" onclick="searchByBarcode()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-comic-primary" onclick="searchByBarcode()">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Buscar Cliente -->
+    <div class="modal fade" id="customerSearchModal" tabindex="-1" aria-labelledby="customerSearchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customerSearchModalLabel"><i class="fas fa-user me-2"></i>Buscar Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre, teléfono o correo del cliente">
+                        <button class="btn btn-comic-primary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action" onclick="selectCustomer(1)">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Carlos Rodríguez</h6>
+                                <small>Cliente Frecuente</small>
+                            </div>
+                            <p class="mb-1">carlos.rodriguez@email.com</p>
+                            <small>(555) 123-4567</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" onclick="selectCustomer(2)">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Ana Martínez</h6>
+                                <small>Cliente VIP</small>
+                            </div>
+                            <p class="mb-1">ana.martinez@email.com</p>
+                            <small>(555) 987-6543</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" onclick="selectCustomer(3)">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Juan Pérez</h6>
+                                <small>Cliente Nuevo</small>
+                            </div>
+                            <p class="mb-1">juan.perez@email.com</p>
+                            <small>(555) 456-7890</small>
+                        </a>
+                    </div>
+                    
+                    <div class="text-center mt-3">
+                        <button class="btn btn-comic-primary" data-bs-toggle="modal" data-bs-target="#newCustomerModal" data-bs-dismiss="modal">
+                            <i class="fas fa-user-plus me-2"></i>Nuevo Cliente
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Nuevo Cliente -->
+    <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newCustomerModalLabel"><i class="fas fa-user-plus me-2"></i>Nuevo Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newCustomerForm">
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="customerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerEmail" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="customerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerPhone" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="customerPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerAddress" class="form-label">Dirección</label>
+                            <textarea class="form-control" id="customerAddress" rows="2"></textarea>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="subscribeNewsletter" checked>
+                            <label class="form-check-label" for="subscribeNewsletter">
+                                Suscribir al boletín de novedades
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-comic-primary" onclick="saveNewCustomer()">Guardar Cliente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Procesar Pago -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkoutModalLabel"><i class="fas fa-credit-card me-2"></i>Procesar Pago</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Cliente Seleccionado -->
+                    <div class="frequent-customer d-flex align-items-center mb-4" id="selectedCustomer">
+                        <div class="customer-points">250</div>
+                        <div>
+                            <h6 class="mb-1">Ana Martínez <span class="customer-level ms-2">Cliente VIP</span></h6>
+                            <p class="mb-1">ana.martinez@email.com | (555) 987-6543</p>
+                            <small class="text-muted">Puntos disponibles: 250 (Descuento disponible: $25.00)</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Resumen de la Compra -->
+                    <h6 class="mb-3"><i class="fas fa-shopping-cart me-2"></i>Resumen de la Compra</h6>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="checkoutItems">
+                                <!-- Los items se agregarán dinámicamente aquí -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end">Subtotal:</td>
+                                    <td id="checkoutSubtotal">$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end">IVA (16%):</td>
+                                    <td id="checkoutTax">$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end">Descuento:</td>
+                                    <td id="checkoutDiscount">$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end fw-bold">Total:</td>
+                                    <td class="fw-bold" id="checkoutTotal">$0.00</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    
+                    <!-- Opciones de Descuento -->
+                    <div class="mb-4">
+                        <h6 class="mb-3"><i class="fas fa-tag me-2"></i>Descuentos</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="usePoints">
+                            <label class="form-check-label" for="usePoints">
+                                Usar 250 puntos para obtener $25.00 de descuento
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Código de cupón">
+                            <button class="btn btn-comic-primary" type="button">Aplicar</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Método de Pago -->
+                    <h6 class="mb-3"><i class="fas fa-money-bill-wave me-2"></i>Método de Pago</h6>
+                    <div class="payment-methods mb-4">
+                        <div class="payment-method selected" onclick="selectPaymentMethod('cash')">
+                            <i class="fas fa-money-bill-wave d-block"></i>
+                            <span>Efectivo</span>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('card')">
+                            <i class="fas fa-credit-card d-block"></i>
+                            <span>Tarjeta</span>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('transfer')">
+                            <i class="fas fa-exchange-alt d-block"></i>
+                            <span>Transferencia</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Detalles del Pago (Efectivo) -->
+                    <div id="cashPaymentDetails">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="amountReceived" class="form-label">Monto Recibido</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="amountReceived" value="0.00" step="0.01" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="changeAmount" class="form-label">Cambio</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" class="form-control" id="changeAmount" value="0.00" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Detalles del Pago (Tarjeta) -->
+                    <div id="cardPaymentDetails" class="d-none">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="cardType" class="form-label">Tipo de Tarjeta</label>
+                                <select class="form-select" id="cardType">
+                                    <option value="visa">Visa</option>
+                                    <option value="mastercard">MasterCard</option>
+                                    <option value="amex">American Express</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastDigits" class="form-label">Últimos 4 dígitos</label>
+                                <input type="text" class="form-control" id="lastDigits" maxlength="4" placeholder="0000">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="authorizationCode" class="form-label">Código de Autorización</label>
+                            <input type="text" class="form-control" id="authorizationCode" placeholder="123456">
+                        </div>
+                    </div>
+                    
+                    <!-- Detalles del Pago (Transferencia) -->
+                    <div id="transferPaymentDetails" class="d-none">
+                        <div class="mb-3">
+                            <label for="transferReference" class="form-label">Referencia de Transferencia</label>
+                            <input type="text" class="form-control" id="transferReference" placeholder="Ej: TR123456789">
+                        </div>
+                        <div class="mb-3">
+                            <label for="transferDate" class="form-label">Fecha de Transferencia</label>
+                            <input type="date" class="form-control" id="transferDate" value="2025-03-13">
+                        </div>
+                    </div>
+                    
+                    <!-- Opciones de Facturación -->
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="requireInvoice">
+                        <label class="form-check-label" for="requireInvoice">
+                            El cliente requiere factura
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-comic-success" onclick="processPayment()">Completar Venta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Venta Completada -->
+    <div class="modal fade" id="saleCompletedModal" tabindex="-1" aria-labelledby="saleCompletedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="saleCompletedModalLabel"><i class="fas fa-check-circle me-2"></i>Venta Completada</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                        <h4>¡Venta realizada con éxito!</h4>
+                        <p>La venta ha sido registrada correctamente.</p>
+                    </div>
+                    
+                    <div class="receipt-container">
+                        <div class="receipt-header">
+                            <div class="receipt-logo">Comic World</div>
+                            <p class="mb-0">Av. Siempre Viva 123</p>
+                            <p class="mb-0">Tel: (123) 456-7890</p>
+                            <p class="mb-0">Fecha: 13/03/2025 12:45 PM</p>
+                            <p class="mb-0">Ticket #: 5001</p>
+                        </div>
+                        
+                        <div class="receipt-items">
+                            <div class="receipt-item">
+                                <span>1x Batman: The Dark Knight #1</span>
+                                <span>$60.00</span>
+                            </div>
+                            <div class="receipt-item">
+                                <span>2x The amazing Spiderman #4</span>
+                                <span>$110.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span>Subtotal:</span>
+                            <span>$170.00</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span>IVA (16%):</span>
+                            <span>$27.20</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span>Descuento:</span>
+                            <span>$25.00</span>
+                        </div>
+                        
+                        <div class="receipt-total">
+                            <span>Total:</span>
+                            <span>$172.20</span>
+                        </div>
+                        
+                        <div class="receipt-barcode">
+                            <img src="/placeholder.svg" alt="Código de Barras" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-comic-primary" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
