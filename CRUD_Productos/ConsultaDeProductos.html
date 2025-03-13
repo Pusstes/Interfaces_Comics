@@ -7,223 +7,169 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Static/CSS/styles.css">
     <style>
-        :root {
-            --primary-color: #dc3545;
-            --secondary-color: #6c757d;
-            --dark-color: #343a40;
-            --light-color: #f8f9fa;
-            --border-radius: 0.5rem;
-        }
-        
-        body {
-            font-family: 'Nunito', sans-serif;
+        /* Estilos adicionales para la página de catálogo */
+        .filter-card {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
         }
         
-        .navbar-comic {
-            background: linear-gradient(135deg, var(--primary-color), #9c1320);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .navbar-brand {
+        .filter-title {
             font-family: 'Bangers', cursive;
-            font-size: 1.8rem;
-            color: white !important;
+            color: #dc3545;
+            letter-spacing: 1px;
         }
         
-        .btn-comic-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: white;
-            transition: all 0.3s;
+        .filter-btn {
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
         
-        .btn-comic-primary:hover {
-            background-color: #b71c2b;
-            border-color: #b71c2b;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card-header-comic {
-            background: linear-gradient(135deg, var(--primary-color), #9c1320);
-            color: white;
-            border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
-            font-family: 'Bangers', cursive;
-            padding: 1rem;
+        .filter-btn:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
         }
         
         .product-card {
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         
         .product-img {
-            height: 280px;
+            height: 300px;
             object-fit: cover;
+        }
+        
+        .product-category {
+            background-color: #dc3545;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
         }
         
         .product-title {
             font-weight: 700;
-            font-size: 1.1rem;
-        }
-        
-        .product-category {
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 0.8rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            display: inline-block;
+            margin-top: 10px;
+            font-family: 'Nunito', sans-serif;
         }
         
         .product-price {
+            font-size: 1.2rem;
             font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--primary-color);
+            color: #dc3545;
         }
         
-        .footer-comic {
-            background: linear-gradient(135deg, var(--dark-color), #212529);
+        .btn-comic-primary {
+            background-color: #dc3545;
+            border-color: #dc3545;
             color: white;
-            padding: 3rem 0 2rem;
-            position: relative;
         }
         
-        .footer-comic a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .footer-comic a:hover {
+        .btn-comic-primary:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
             color: white;
-            text-decoration: none;
         }
         
-        .filter-badge {
-            background-color: var(--primary-color);
+        .page-item.active .page-link {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .page-link {
+            color: #dc3545;
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: #dc3545;
+        }
+        
+        .nav-pills .nav-link {
+            color: #333;
+        }
+        
+        .badge-stock {
+            background-color: #28a745;
             color: white;
             font-size: 0.8rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 50px;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-            transition: all 0.3s;
-        }
-        
-        .filter-badge:hover {
-            background-color: #b71c2b;
-            cursor: pointer;
-        }
-        
-        .filter-badge i {
-            margin-left: 0.3rem;
-        }
-        
-        .page-heading {
-            position: relative;
-            overflow: hidden;
-            background: url('/Static/IMG/home/exclusivasFiguras.jpeg') no-repeat center center;
-            background-size: cover;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .page-heading::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-        }
-        
-        .page-title {
-            font-family: 'Bangers', cursive;
-            font-size: 3rem;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            position: relative;
-            z-index: 2;
-        }
-        
-        .sidebar-filter {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .sidebar-heading {
-            font-family: 'Bangers', cursive;
-            color: var(--dark-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .price-slider {
-            width: 100%;
-        }
-        
-        .pagination .page-item.active .page-link {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .pagination .page-link {
-            color: var(--dark-color);
-        }
-        
-        .sort-dropdown .dropdown-item:hover {
-            background-color: #f8d7da;
-        }
-        
-        .view-toggle .btn-check:checked + .btn-outline-secondary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: white;
-        }
-        
-        .new-label {
+            padding: 5px 8px;
+            border-radius: 5px;
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.3rem 0.6rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 1;
         }
         
-        .sale-label {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+        .badge-limited {
             background-color: #ffc107;
-            color: black;
-            padding: 0.3rem 0.6rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 1;
+            color: #333;
+        }
+        
+        .badge-sold-out {
+            background-color: #6c757d;
+        }
+        
+        .grid-view-btn, .list-view-btn {
+            color: #6c757d;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+        }
+        
+        .grid-view-btn.active, .list-view-btn.active {
+            color: #dc3545;
+        }
+        
+        .breadcrumb-item a {
+            color: #dc3545;
+        }
+        
+        /* Vista Lista */
+        .list-view .product-card {
+            margin-bottom: 20px;
+        }
+        
+        .list-view-item {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .list-view-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .search-bar {
+            position: relative;
+        }
+        
+        .search-bar .form-control {
+            padding-left: 40px;
+            border-radius: 20px;
+        }
+        
+        .search-bar .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            color: #6c757d;
         }
     </style>
 </head>
@@ -323,319 +269,433 @@
         </div>
     </nav>
     
-    <!-- Encabezado de página -->
-    <div class="page-heading">
-        <h1 class="page-title">Catálogo de Productos</h1>
+    <!-- Hero Section -->
+    <div class="container-fluid p-0">
+        <div class="bg-dark text-white py-5" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/Static/IMG/home/catalogoBanner.jpg'); background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mx-auto text-center">
+                        <h1 class="display-4 fw-bold">Catálogo Completo</h1>
+                        <p class="lead">Explora nuestra colección de cómics y figuras exclusivas</p>
+                        <div class="search-bar mt-4">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" class="form-control form-control-lg" placeholder="Buscar por título, personaje, editorial...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <!-- Contenido del catálogo -->
-    <div class="container my-5">
-        <!-- Barra de navegación de migajas -->
+    <!-- Breadcrumb -->
+    <div class="container mt-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/home.html">Inicio</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Catálogo</li>
             </ol>
         </nav>
-        
-        <!-- Filtros activos -->
-        <div class="my-3">
-            <h6 class="d-inline me-2">Filtros activos:</h6>
-            <span class="filter-badge">Marvel <i class="fas fa-times"></i></span>
-            <span class="filter-badge">Figuras <i class="fas fa-times"></i></span>
-            <span class="filter-badge">$0 - $100 <i class="fas fa-times"></i></span>
-            <span class="filter-badge">En stock <i class="fas fa-times"></i></span>
-            <button class="btn btn-sm btn-outline-secondary ms-2">Limpiar todo</button>
-        </div>
-        
+    </div>
+    
+    <!-- Categorías en pestañas -->
+    <div class="container mt-4">
+        <ul class="nav nav-pills nav-fill mb-4">
+            <li class="nav-item">
+                <a class="nav-link active" href="#todos" data-bs-toggle="pill">Todos los productos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#comics" data-bs-toggle="pill">Cómics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#figuras" data-bs-toggle="pill">Figuras</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#mangas" data-bs-toggle="pill">Mangas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#coleccionables" data-bs-toggle="pill">Coleccionables</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#accesorios" data-bs-toggle="pill">Accesorios</a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Contenido Principal -->
+    <div class="container mt-3">
         <div class="row">
-            <!-- Sidebar con filtros -->
-            <div class="col-lg-3 mb-4">
-                <div class="sidebar-filter">
-                    <h4 class="sidebar-heading">Filtros</h4>
+            <!-- Filtros Laterales -->
+            <div class="col-lg-3">
+                <div class="filter-card mb-4">
+                    <h5 class="filter-title mb-3">Filtros</h5>
                     
-                    <!-- Categorías -->
-                    <div class="mb-4">
-                        <h5>Categorías</h5>
+                    <!-- Tipo de Producto -->
+                    <div class="mb-3">
+                        <h6 class="fw-bold">Tipo de Producto</h6>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="comicsCheck" checked>
-                            <label class="form-check-label" for="comicsCheck">
-                                Cómics (142)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="comicCheck" checked>
+                            <label class="form-check-label" for="comicCheck">Cómics</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="figurasCheck" checked>
-                            <label class="form-check-label" for="figurasCheck">
-                                Figuras (87)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="figuraCheck" checked>
+                            <label class="form-check-label" for="figuraCheck">Figuras</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="mangaCheck">
-                            <label class="form-check-label" for="mangaCheck">
-                                Manga (56)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="mangaCheck" checked>
+                            <label class="form-check-label" for="mangaCheck">Mangas</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="merchandisingCheck">
-                            <label class="form-check-label" for="merchandisingCheck">
-                                Merchandising (34)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="coleccionableCheck" checked>
+                            <label class="form-check-label" for="coleccionableCheck">Coleccionables</label>
+                        </div>
+                       
+                    </div>
+                    
+                    <!-- Editorial/Fabricante -->
+                    <div class="mb-3">
+                        <h6 class="fw-bold">Editorial/Fabricante</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="marvelCheck" checked>
+                            <label class="form-check-label" for="marvelCheck">Marvel</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="juegosCheck">
-                            <label class="form-check-label" for="juegosCheck">
-                                Juegos de mesa (23)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="dcCheck" checked>
+                            <label class="form-check-label" for="dcCheck">DC Comics</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="imageCheck" checked>
+                            <label class="form-check-label" for="imageCheck">Image Comics</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="darkHorseCheck" checked>
+                            <label class="form-check-label" for="darkHorseCheck">Dark Horse</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="bandaiCheck" checked>
+                            <label class="form-check-label" for="bandaiCheck">Bandai</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="mcfarlaneCheck" checked>
+                            <label class="form-check-label" for="mcfarlaneCheck">McFarlane Toys</label>
                         </div>
                     </div>
                     
-                    <!-- Universo/Franquicia -->
-                    <div class="mb-4">
-                        <h5>Universo/Franquicia</h5>
+                    <!-- Personajes -->
+                    <div class="mb-3">
+                        <h6 class="fw-bold">Personajes</h6>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="marvelCheck" checked>
-                            <label class="form-check-label" for="marvelCheck">
-                                Marvel (94)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="batmanCheck" checked>
+                            <label class="form-check-label" for="batmanCheck">Batman</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="dcCheck">
-                            <label class="form-check-label" for="dcCheck">
-                                DC Comics (81)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="spidermanCheck" checked>
+                            <label class="form-check-label" for="spidermanCheck">Spider-Man</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="starWarsCheck">
-                            <label class="form-check-label" for="starWarsCheck">
-                                Star Wars (37)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="supermanCheck" checked>
+                            <label class="form-check-label" for="supermanCheck">Superman</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="imageCheck">
-                            <label class="form-check-label" for="imageCheck">
-                                Image Comics (22)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="wonderWomanCheck" checked>
+                            <label class="form-check-label" for="wonderWomanCheck">Wonder Woman</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="otrosCheck">
-                            <label class="form-check-label" for="otrosCheck">
-                                Otros (58)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="hulkCheck" checked>
+                            <label class="form-check-label" for="hulkCheck">Hulk</label>
                         </div>
                     </div>
                     
-                    <!-- Precio -->
-                    <div class="mb-4">
-                        <h5>Precio</h5>
-                        <input type="range" class="form-range price-slider mb-2" min="0" max="500" value="100" id="priceRange">
-                        <div class="d-flex justify-content-between">
-                            <span>$0</span>
-                            <span>Hasta $<span id="priceValue">100</span></span>
+                    <!-- Rango de Precio -->
+                    <div class="mb-3">
+                        <h6 class="fw-bold">Rango de Precio</h6>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="me-2">$0</span>
+                            <input type="range" class="form-range" min="0" max="200" value="200" id="precioRange">
+                            <span class="ms-2">$200+</span>
+                        </div>
+                        <div class="d-flex">
+                            <input type="number" class="form-control form-control-sm me-2" placeholder="Min $">
+                            <input type="number" class="form-control form-control-sm" placeholder="Max $">
                         </div>
                     </div>
                     
                     <!-- Disponibilidad -->
-                    <div class="mb-4">
-                        <h5>Disponibilidad</h5>
+                    <div class="mb-3">
+                        <h6 class="fw-bold">Disponibilidad</h6>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="enStockCheck" checked>
-                            <label class="form-check-label" for="enStockCheck">
-                                En stock (231)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="enStockCheck" checked>
+                            <label class="form-check-label" for="enStockCheck">En Stock</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="agotadoCheck">
-                            <label class="form-check-label" for="agotadoCheck">
-                                Agotado (45)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="ofertasCheck" checked>
+                            <label class="form-check-label" for="ofertasCheck">Ofertas</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="preorderCheck">
-                            <label class="form-check-label" for="preorderCheck">
-                                Pre-orden (66)
-                            </label>
+                            <input class="form-check-input" type="checkbox" id="nuevosCheck" checked>
+                            <label class="form-check-label" for="nuevosCheck">Nuevos Lanzamientos</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="preordenCheck" checked>
+                            <label class="form-check-label" for="preordenCheck">Pre-orden</label>
                         </div>
                     </div>
                     
-                    <!-- Ofertas -->
-                    <div class="mb-4">
-                        <h5>Ofertas</h5>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ofertasCheck">
-                            <label class="form-check-label" for="ofertasCheck">
-                                En oferta (36)
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="liquidacionCheck">
-                            <label class="form-check-label" for="liquidacionCheck">
-                                Liquidación (18)
-                            </label>
-                        </div>
+                    <button class="btn btn-comic-primary w-100 mt-2">Aplicar Filtros</button>
+                    <button class="btn btn-outline-secondary w-100 mt-2">Reiniciar Filtros</button>
+                </div>
+                
+                <!-- Etiquetas Populares -->
+                <div class="filter-card mb-4">
+                    <h5 class="filter-title mb-3">Etiquetas Populares</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="#" class="badge bg-secondary text-decoration-none">Superhéroes</a>
+                        <a href="#" class="badge bg-secondary text-decoration-none">Edición Limitada</a>
+                        <a href="#" class="badge bg-secondary text-decoration-none">Manga</a>
+                        <a href="#" class="badge bg-secondary text-decoration-none">Villanos</a>
+                        <a href="#" class="badge bg-secondary text-decoration-none">Anime</a>
+                        <a href="#" class="badge bg-secondary text-decoration-none">Exclusivas</a>
+                        <a href="#" class="badge bg-secondary text-decoration-none">Vintage</a>
+                        <a href="#" class="badge bg-secondary text-decoration-none">Grapas</a>
+                        <a href="#" class="badge bg-secondary text-decoration-none">Tomos</a>
                     </div>
-                    
-                    <!-- Calificación -->
-                    <div class="mb-4">
-                        <h5>Calificación</h5>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="5starCheck">
-                            <label class="form-check-label" for="5starCheck">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                (43)
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="4starCheck">
-                            <label class="form-check-label" for="4starCheck">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="far fa-star text-warning"></i>
-                                & más (98)
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="3starCheck">
-                            <label class="form-check-label" for="3starCheck">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="far fa-star text-warning"></i>
-                                <i class="far fa-star text-warning"></i>
-                                & más (156)
-                            </label>
-                        </div>
+                </div>
+                
+                <!-- Banner Promocional -->
+                <div class="card border-0 overflow-hidden mb-4">
+                    <img src="/Static/IMG/home/ofertaBaner.jpg" class="card-img-top" alt="Oferta especial">
+                    <div class="card-body bg-dark text-white">
+                        <h5 class="card-title">Oferta Especial</h5>
+                        <p class="card-text">Descuento del 15% en todos los productos Marvel.</p>
+                        <a href="#" class="btn btn-sm btn-outline-light">Ver Oferta</a>
                     </div>
-                    
-                    <button class="btn btn-comic-primary w-100">Aplicar filtros</button>
                 </div>
             </div>
             
-            <!-- Productos y opciones de visualización -->
+            <!-- Productos -->
             <div class="col-lg-9">
-                <!-- Opciones de ordenar y visualización -->
+                <!-- Opciones de Visualización y Ordenamiento -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div class="sort-dropdown">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-sort me-1"></i>Ordenar por: Relevancia
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-sort-amount-down me-2"></i>Precio: Mayor a menor</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-sort-amount-up me-2"></i>Precio: Menor a mayor</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-star me-2"></i>Mejor valorados</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-alt me-2"></i>Más recientes</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-fire-alt me-2"></i>Más vendidos</a></li>
-                                <li><a class="dropdown-item active" href="#"><i class="fas fa-thumbs-up me-2"></i>Relevancia</a></li>
-                            </ul>
-                        </div>
+                    <div>
+                        <span class="me-2">Mostrando 1-24 de 128 productos</span>
                     </div>
-                    
                     <div class="d-flex align-items-center">
-                        <span class="me-3">Mostrando 1-12 de 229 productos</span>
-                        <div class="view-toggle btn-group" role="group">
-                            <input type="radio" class="btn-check" name="viewOptions" id="gridView" autocomplete="off" checked>
-                            <label class="btn btn-outline-secondary" for="gridView"><i class="fas fa-th-large"></i></label>
-                            
-                            <input type="radio" class="btn-check" name="viewOptions" id="listView" autocomplete="off">
-                            <label class="btn btn-outline-secondary" for="listView"><i class="fas fa-list"></i></label>
+                        <div class="me-3">
+                            <label class="me-2">Ordenar por:</label>
+                            <select class="form-select form-select-sm d-inline-block" style="width: auto;">
+                                <option selected>Destacados</option>
+                                <option>Precio: Menor a Mayor</option>
+                                <option>Precio: Mayor a Menor</option>
+                                <option>Nombre: A-Z</option>
+                                <option>Nombre: Z-A</option>
+                                <option>Más recientes</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button class="grid-view-btn active me-1"><i class="fas fa-th"></i></button>
+                            <button class="list-view-btn"><i class="fas fa-list"></i></button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Grid de productos -->
-                <div class="row g-4">
-                    <!-- Producto 1 -->
-                    <div class="col-md-4">
-                        <div class="card product-card h-100">
-                            <span class="new-label">Nuevo</span>
-                            <img src="/Static/IMG/home/dark_knight_rises_ver4.jpg" class="card-img-top product-img" alt="Producto 1">
-                            <div class="card-body d-flex flex-column">
-                                <span class="product-category mb-2">Cómic</span>
-                                <h5 class="product-title">Batman: The Dark Knight Returns</h5>
-                                <div class="mb-2">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star-half-alt text-warning"></i>
-                                    <small class="ms-1">(128)</small>
-                                </div>
-                                <p class="card-text">La obra maestra de Frank Miller que redefinió al Caballero Oscuro para siempre.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto">
-                                    <span class="product-price">$24.99</span>
-                                    <button class="btn btn-sm btn-comic-primary">
-                                        <i class="fas fa-shopping-cart me-1"></i>Añadir
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 2 -->
-                    <div class="col-md-4">
-                        <div class="card product-card h-100">
-                            <span class="sale-label">-20%</span>
-                            <img src="/Static/IMG/home/spider-man-marve--comics-estatua.jpg" class="card-img-top product-img" alt="Producto 2">
-                            <div class="card-body d-flex flex-column">
-                                <span class="product-category mb-2">Figura</span>
-                                <h5 class="product-title">Spider-Man: Amazing Fantasy</h5>
-                                <div class="mb-2">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <small class="ms-1">(94)</small>
-                                </div>
-                                <p class="card-text">Figura coleccionable de edición limitada de Spider-Man inspirada en Amazing Fantasy #15.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto">
-                                    <span class="product-price">$89.99 <small class="text-decoration-line-through text-muted">$112.99</small></span>
-                                    <button class="btn btn-sm btn-comic-primary">
-                                        <i class="fas fa-shopping-cart me-1"></i>Añadir
-                                    </button>
+                <!-- Productos en Vista Cuadrícula -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="todos">
+                        <div class="row g-4 grid-view">
+                            <!-- Producto 1 -->
+                            <div class="col-md-4">
+                                <div class="card product-card h-100">
+                                    <div class="badge-stock">En Stock</div>
+                                    <img src="/Static/IMG/home/dark_knight_rises_ver4.jpg" class="card-img-top product-img" alt="Batman Comic">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="product-category">Cómic</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <h5 class="product-title">Batman: The Dark Knight #1</h5>
+                                        <p class="card-text">La aclamada serie que redefine al Caballero Oscuro. Edición especial con portada alternativa.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <span class="product-price">$15.99</span>
+                                            <button class="btn btn-sm btn-comic-primary">
+                                                <i class="fas fa-shopping-cart me-1"></i>Añadir
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 3 -->
-                    <div class="col-md-4">
-                        <div class="card product-card h-100">
-                            <img src="/Static/IMG/home/spider_comic.jpg" class="card-img-top product-img" alt="Producto 3">
-                            <div class="card-body d-flex flex-column">
-                                <span class="product-category mb-2">Cómic</span>
-                                <h5 class="product-title">Spider-Man: No Way Home</h5>
-                                <div class="mb-2">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="far fa-star text-warning"></i>
-                                    <small class="ms-1">(67)</small>
-                                </div>
-                                <p class="card-text">La adaptación oficial del éxito cinematográfico con contenido exclusivo y arte conceptual.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto">
-                                    <span class="product-price">$19.99</span>
-                                    <button class="btn btn-sm btn-comic-primary">
-                                        <i class="fas fa-shopping-cart me-1"></i>Añadir
-                                    </button>
+                            
+                            <!-- Producto 2 -->
+                            <div class="col-md-4">
+                                <div class="card product-card h-100">
+                                    <div class="badge-stock badge-limited">¡Quedan 3!</div>
+                                    <img src="/Static/IMG/home/spider-man-marve--comics-estatua.jpg" class="card-img-top product-img" alt="Spider-Man Figure">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="product-category">Figura</span>
+                                            <small class="text-muted">Marvel</small>
+                                        </div>
+                                        <h5 class="product-title">Spider-Man Premium Figure</h5>
+                                        <p class="card-text">Figura coleccionable de Spider-Man con detalles increíbles y accesorios intercambiables.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <span class="product-price">$89.99</span>
+                                            <button class="btn btn-sm btn-comic-primary">
+                                                <i class="fas fa-shopping-cart me-1"></i>Añadir
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 4 -->
-                    <div class="col-md-4">
-                        <div class="card product-card h-100">
-                            <img src="/api/placeholder/400/320" alt="Superman: Man of Steel" class="card-img-top product-img">
-                            <div class="card-body d-flex flex-column">
-                                <span class="product-category mb-2">Figura</span>
-                                <h5 class="product-title">Superman: Man of Steel</h5>
-                                <div class="mb-2">
-                                    <i class="fas fa-star text-warning">
+                            
+                            <!-- Producto 3 -->
+                            <div class="col-md-4">
+                                <div class="card product-card h-100">
+                                    <div class="badge-stock">En Stock</div>
+                                    <img src="/Static/IMG/home/spider_comic.jpg" class="card-img-top product-img" alt="Superman Comic">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="product-category">Cómic</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <h5 class="product-title">Superman: Man of Tomorrow #5</h5>
+                                        <p class="card-text">La historia definitiva del Hombre de Acero en una edición especial con páginas adicionales.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <span class="product-price">$12.99</span>
+                                            <button class="btn btn-sm btn-comic-primary">
+                                                <i class="fas fa-shopping-cart me-1"></i>Añadir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 4 -->
+                            <div class="col-md-4">
+                                <div class="card product-card h-100">
+                                    <div class="badge-stock badge-sold-out">Agotado</div>
+                                    <img src="/Static/IMG/home/proximamente.jpg" class="card-img-top product-img" alt="Wonder Woman Figure">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="product-category">Figura</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <h5 class="product-title">Wonder Woman Deluxe Figure</h5>
+                                        <p class="card-text">Espectacular figura de Wonder Woman inspirada en la película, con base especial y accesorios.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <span class="product-price">$79.99</span>
+                                            <button class="btn btn-sm btn-secondary" disabled>
+                                                <i class="fas fa-bell me-1"></i>Avisar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 5 -->
+                            <div class="col-md-4">
+                                <div class="card product-card h-100">
+                                    <div class="badge-stock">En Stock</div>
+                                    <img src="/Static/IMG/home/exclusivasFiguras.jpeg" class="card-img-top product-img" alt="Manga">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="product-category">Manga</span>
+                                            <small class="text-muted">Viz Media</small>
+                                        </div>
+                                        <h5 class="product-title">One Piece Vol. 98</h5>
+                                        <p class="card-text">El último volumen de la épica serie de manga One Piece, con capítulos inéditos y extras.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <span class="product-price">$79.99</span>
+                                            <button class="btn btn-sm btn-secondary" disabled>
+                                                <i class="fas fa-bell me-1"></i>Avisar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <!-- Producto 6 -->
+                             <div class="col-md-4">
+                                <div class="card product-card h-100">
+                                    <div class="badge-stock">En Stock</div>
+                                    <img src="/Static/IMG/home/spider_comic.jpg" class="card-img-top product-img" alt="Superman Comic">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="product-category">Cómic</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <h5 class="product-title">Superman: Man of Tomorrow #5</h5>
+                                        <p class="card-text">La historia definitiva del Hombre de Acero en una edición especial con páginas adicionales.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <span class="product-price">$12.99</span>
+                                            <button class="btn btn-sm btn-comic-primary">
+                                                <i class="fas fa-shopping-cart me-1"></i>Añadir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <!-- Producto 7 -->
+                             <div class="col-md-4">
+                                <div class="card product-card h-100">
+                                    <div class="badge-stock">En Stock</div>
+                                    <img src="/Static/IMG/home/spider_comic.jpg" class="card-img-top product-img" alt="Superman Comic">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="product-category">Cómic</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <h5 class="product-title">Superman: Man of Tomorrow #5</h5>
+                                        <p class="card-text">La historia definitiva del Hombre de Acero en una edición especial con páginas adicionales.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <span class="product-price">$12.99</span>
+                                            <button class="btn btn-sm btn-comic-primary">
+                                                <i class="fas fa-shopping-cart me-1"></i>Añadir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <!-- Producto 8 -->
+                             <div class="col-md-4">
+                                <div class="card product-card h-100">
+                                    <div class="badge-stock">En Stock</div>
+                                    <img src="/Static/IMG/home/spider_comic.jpg" class="card-img-top product-img" alt="Superman Comic">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="product-category">Cómic</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <h5 class="product-title">Superman: Man of Tomorrow #5</h5>
+                                        <p class="card-text">La historia definitiva del Hombre de Acero en una edición especial con páginas adicionales.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <span class="product-price">$12.99</span>
+                                            <button class="btn btn-sm btn-comic-primary">
+                                                <i class="fas fa-shopping-cart me-1"></i>Añadir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <!-- Producto 9 -->
+                            <div class="col-md-4">
+                                <div class="card product-card h-100">
+                                    <div class="badge-stock">En Stock</div>
+                                    <img src="/Static/IMG/home/spider_comic.jpg" class="card-img-top product-img" alt="Superman Comic">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="product-category">Cómic</span>
+                                            <small class="text-muted">DC Comics</small>
+                                        </div>
+                                        <h5 class="product-title">Superman: Man of Tomorrow #5</h5>
+                                        <p class="card-text">La historia definitiva del Hombre de Acero en una edición especial con páginas adicionales.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <span class="product-price">$12.99</span>
+                                            <button class="btn btn-sm btn-comic-primary">
+                                                <i class="fas fa-shopping-cart me-1"></i>Añadir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+             </div>
