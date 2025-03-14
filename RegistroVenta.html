@@ -1028,3 +1028,17 @@
                 </div>
             </div>
         </div>
+        <script>
+            // Simulación de cambio de navbar según el tipo de usuario
+            let userType = "admin"; // Cambia a "empleado" para la otra navbar
+            
+            if (userType === "admin") {
+                document.getElementById("navbar-admin").classList.remove("d-none");
+            } else {
+                document.getElementById("navbar-empleado").classList.remove("d-none");
+            }
+        </script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
